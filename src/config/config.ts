@@ -1,4 +1,5 @@
 
+
 type DataBase = { 
     host:string,
     user:string,
@@ -21,7 +22,7 @@ const dbConfig:DataBase ={
     host:"localhost",
     user:"root",
     password:"",
-    dbName:"e-commersdatabase",
+    dbName:"backendEcommers",
     dialect: "mysql",
     pool:{
         min:0,

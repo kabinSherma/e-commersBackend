@@ -29,4 +29,4 @@ db.sequelize.sync({force:true}).then(()=>{
     console.log("Yes migratted")
 })
 
-module.exports = db
+module.exports = db 
