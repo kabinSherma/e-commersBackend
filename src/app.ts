@@ -1,17 +1,24 @@
+require('reflect-metadata')
+
 const dotenv = require ('dotenv')
 dotenv.config()
 
 const express = require ('express')
-import  type {Application,Request,Response} from 'express'
+import  type {Application} from 'express'
 const app:Application= express()
+
+
+app.use(express.json())
+
 const PORT:number = 3000
 
-
 require('./database/connection')
+const productRoutes = require('./routes/productRoute')
+const userRoutes = require('./routes/userRoutes')
 
-app.get('/',(req:Request,res:Response)=>{
-    res.send("Hello world")
-})
+app.use("",userRoutes)
+
+app.use("",productRoutes)
 
 
 app.listen(PORT,()=>{
