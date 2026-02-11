@@ -7,7 +7,7 @@ const express = require ('express')
 import  type {Application} from 'express'
 const app:Application= express()
 
-
+app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
 const PORT:number = 3000

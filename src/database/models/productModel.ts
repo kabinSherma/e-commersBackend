@@ -53,10 +53,10 @@ class Product extends Model {
 
     // image 
 
-//     @Column ({
-//         type:DataType.file
-//     })
-//     declare image:
+    @Column ({
+        type:DataType.STRING
+    })
+    declare image:string;
 }
 
 

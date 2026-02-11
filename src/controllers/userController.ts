@@ -1,4 +1,5 @@
 import type {Request,Response} from 'express'
+const bcrypt =require('bcrypt')
 const User =require("../database/models/userModels")
 
 
@@ -17,7 +18,7 @@ class AuthController {
        await User.create({
             username,
             email,
-            password
+            password :bcrypt.hashSync(password,8)
         })
 
         res.status(201).json({
