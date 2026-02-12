@@ -26,21 +26,21 @@ __decorate([
 ], Product.prototype, "id", void 0);
 __decorate([
     Column({
-        type: DataType.string
+        type: DataType.STRING
     }),
     __metadata("design:type", String)
 ], Product.prototype, "name", void 0);
 __decorate([
     Column({
-        type: DataType.string
+        type: DataType.STRING
     }),
     __metadata("design:type", String)
-], Product.prototype, "Des", void 0);
+], Product.prototype, "des", void 0);
 __decorate([
     Column({
-        type: DataType.string
+        type: DataType.FLOAT
     }),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], Product.prototype, "price", void 0);
 Product = __decorate([
     Table({

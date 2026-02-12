@@ -1,13 +1,13 @@
-import type { Router } from "express"
-const express =require('express')
-const ProductController =require('../controllers/productContorllre')
+// import type { Router } from "express"
+// const express =require('express')
+// const ProductController =require('../controllers/productContorllre')
 
 
-const router:Router = express.Router()
+// const router:Router = express.Router()
 
 
-router.route("/addProduct").post(
+// router.route("/addProduct").post(
 
-    ProductController.addProduct)
+//     ProductController.addProduct)
 
-module.exports= router
+// module.exports= router

@@ -3,8 +3,7 @@ const {
     Table,
     Column,
     Model,
-    DataType,
-    CreatedAt
+    DataType
 } = require('sequelize-typescript')
 
 
@@ -32,24 +31,34 @@ class User extends Model {
     // userm name 
 
     @Column({
-        type:DataType.string
+        type:DataType.STRING
     })
     declare username:string;
 
     // email
 
     @Column({
-        type:DataType.string
+        type:DataType.STRING
     })
     declare email:string;
 
     //password 
 
     @Column({
-        type:DataType.string
+        type:DataType.STRING
     })
     declare password:string;
 
+    //  role
+
+    @Column ({
+        type:DataType.ENUM( "customer","admin" ),
+        defaultValue:'customer',
+        validate: {
+        isIn: [["customer", "admin"]]
+        }
+    })
+    declare role:string
 }
 
 

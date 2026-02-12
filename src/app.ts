@@ -18,7 +18,7 @@ const userRoutes = require('./routes/userRoutes')
 
 app.use("",userRoutes)
 
-app.use("",productRoutes)
+// app.use("",productRoutes)
 
 
 app.listen(PORT,()=>{

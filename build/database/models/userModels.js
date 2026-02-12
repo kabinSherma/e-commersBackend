@@ -26,22 +26,29 @@ __decorate([
 ], User.prototype, "id", void 0);
 __decorate([
     Column({
-        type: DataType.string
+        type: DataType.STRING
     }),
     __metadata("design:type", String)
 ], User.prototype, "username", void 0);
 __decorate([
     Column({
-        type: DataType.string
+        type: DataType.STRING
     }),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
     Column({
-        type: DataType.string
+        type: DataType.STRING
     }),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
+__decorate([
+    Column({
+        type: DataType.ENUM("customer", "admin"),
+        defaultValue: 'customer'
+    }),
+    __metadata("design:type", String)
+], User.prototype, "role", void 0);
 User = __decorate([
     Table({
         tableName: "users",
