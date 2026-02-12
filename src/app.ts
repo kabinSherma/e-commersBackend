@@ -16,6 +16,12 @@ require('./database/connection')
 const productRoutes = require('./routes/productRoute')
 const userRoutes = require('./routes/userRoutes')
 
+// seeding admin crendeential 
+
+const adminSeeding= require('./services/adminSeeding')
+
+adminSeeding()
+
 app.use("",userRoutes)
 
 // app.use("",productRoutes)
