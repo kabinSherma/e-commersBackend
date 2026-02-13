@@ -24,7 +24,7 @@ adminSeeding()
 
 app.use("",userRoutes)
 
-// app.use("",productRoutes)
+app.use("",productRoutes)
 
 
 app.listen(PORT,()=>{

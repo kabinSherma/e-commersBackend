@@ -24,39 +24,51 @@ class Product extends Model {
         defaultValue: DataType.UUIDV4
 
     })
-    declare id:string;
+    declare productId:string;
 
     // product name 
 
     @Column({
-        type: DataType.STRING
+        type: DataType.STRING,
+        allowNull:false
     })
-    declare name:string;
+    declare productName:string;
 
 
     // product description 
 
     @Column({
 
-        type:DataType.STRING
+        type:DataType.TEXT,
+        allowNull:false
     })
 
-    declare des:string;
+    declare productDescription:string;
 
     
     // price 
 
     @Column({
-        type: DataType.FLOAT
+        type: DataType.INTEGER,
+        // allowNull:false
     })
     declare price : number;
 
+
+    // product quantity
+
+    @Column({
+        type: DataType.INTEGER,
+        allowNull:false
+    })
+    declare productQuantity : number;
+
     // image 
 
-//     @Column ({
-//         type:DataType.STRING
-//     })
-//     declare image:string;
+    @Column ({
+        type:DataType.STRING
+    })
+    declare productImage:string;
 }
 
 

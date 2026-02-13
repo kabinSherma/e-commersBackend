@@ -95,7 +95,7 @@ class AuthController {
             // generate token to user 
             const token = jwt.sign(
                 {id:data.id},
-                "haa",
+                process.env.SECRET_KEY as string,
                 {
                 expiresIn : "20d"
                 }
