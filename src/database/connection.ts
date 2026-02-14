@@ -4,6 +4,7 @@ const { Sequelize } = require('sequelize-typescript')
 // Explicitly require models so decorators get applied
 const User = require('./models/userModels')
 const Product=require('./models/productModel')
+const Category =require('./models/category') 
 
 const sequelize = new Sequelize({
     database: process.env.DB_NAME,
@@ -12,7 +13,7 @@ const sequelize = new Sequelize({
     dialect: 'mysql',
     password: process.env.DB_PASSWORD,
     port: Number(process.env.DB_PORT),
-    models: [ User,Product]
+    models: [ User,Product,Category]
  })
 
 
@@ -27,6 +28,16 @@ const sequelize = new Sequelize({
  sequelize.sync({force:false}).then(()=>{
     console.log("synced  !!")
  })
+
+
+//  relationships
+
+User.hasMany(Product,{foreignKey: "userId"})
+Product.belongsTo(User,{foreignKey:"userId"})
+
+
+Product.belongsTo(Category,{foreignKey: "categoryId"})
+Category.hasOne(Product,{foreignKey:"categoryId"})
 
 
 module.exports = sequelize

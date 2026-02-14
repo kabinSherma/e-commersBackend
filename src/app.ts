@@ -15,12 +15,16 @@ const PORT:number = 3000
 require('./database/connection')
 const productRoutes = require('./routes/productRoute')
 const userRoutes = require('./routes/userRoutes')
+const CategoryController = require ('./controllers/categoryController')
 
 // seeding admin crendeential 
 
 const adminSeeding= require('./services/adminSeeding')
 
 adminSeeding()
+
+
+CategoryController.seedingCategory()
 
 app.use("",userRoutes)
 

@@ -5,14 +5,22 @@ const Product =require('../database/models/productModel')
 interface MiddlewareRequest extends Request {
 
     file?:any
+    user?:{
+        id:string,
+        username:string,
+        role:string,
+        email:string
+    }
 }
 
 
 class ProductController {
     
     public static async addProduct (req:MiddlewareRequest, res:Response):Promise<void>{
-        const {productName,productPrice,productDescription,productQuantity}=req.body
-        let fileName 
+        const {productName,productPrice,productDescription,productQuantity,categoryId}=req.body
+
+        const userId = req.user?.id
+        let fileName  
 
         if (req.file){
 
@@ -35,7 +43,9 @@ class ProductController {
             productDescription,
             productPrice,
             productQuantity,
-            productImage: fileName
+            productImage: fileName,
+            userId:userId,
+            categoryId
        })
 
         res.status(200).json({
