@@ -10,8 +10,8 @@ const upload = multer({storage:storage})
 const router:Router = express.Router()
 
 
-router.route("/admin/addProduct")
-
+router.route("/")
 .post( AuthMiddleware.isAuthenticated, AuthMiddleware.restrictTo([Role.admin]),upload.single("image"),  ProductController.addProduct)
+router.route("/products").get(ProductController.getAllProducts)
 
 module.exports= router

@@ -1,5 +1,7 @@
 import type  { Response,Request } from 'express'
 const Product =require('../database/models/productModel')
+const User =require ('../database/models/userModels')
+const Category =require('../database/models/category')
 
 
 interface MiddlewareRequest extends Request {
@@ -53,6 +55,30 @@ class ProductController {
         })
     }
 
+
+    public static async getAllProducts(req:Request, res:Response):Promise<void>{
+
+         const data = await Product.findAll(
+            {
+                include:[
+                    {
+                        model : User,
+                        attributes: [ "id","username","email"]
+                    },
+                    {
+                        model : Category,
+                        attributes: [ "id","categoryName"]
+                    }
+                ]
+            }
+         )
+
+         res.status(200).json({
+
+            message : 'All products fetched successfully',
+            data
+         })
+    }
 }
 
 module.exports = ProductController
