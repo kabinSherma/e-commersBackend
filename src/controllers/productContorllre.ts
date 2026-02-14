@@ -79,6 +79,119 @@ class ProductController {
             data
          })
     }
+
+
+    public static async getSingleProduct(req:Request,res:Response):Promise<void>{
+
+        const id = req.params.id
+
+        const data = await Product.findAll({
+            where :{
+                productId :id
+            },
+            include:[
+                {
+                    model:User,
+                    attributes:["id","username","email"]
+                },
+                {
+                    model    : Category,
+                    attributes:["id","categoryName"]
+                }
+
+            ]
+
+        })
+
+        if(data.length === 0 ){
+            res.status(404).json({
+                message: " Product not found"
+            })
+        }
+        else {
+            res.status(200).json({
+                message:  " Product fetched successfully",
+                data
+            })
+        }
+    }
+
+
+    public static  async deleteProduct(req:Request,res:Response):Promise<void>{
+
+        const id =req.params.id
+
+        const data  = await Product.findAll({
+            where :{
+                productId:id
+            }
+        })
+
+
+        if(data.length > 0 ){
+            await Product.destroy({
+                where:{
+                    productId:id
+                }
+            })
+            res.status(200).json({
+                message: " Product deleted successfully"
+            })
+        }
+        else {
+            res.status(404).json({
+                message: " Product no found "
+            })
+        }
+    }
+
+
+    public static async editProduct(req:MiddlewareRequest,res:Response):Promise<void>{
+
+        const id= req.params.id
+        const {productName,productPrice,productDescription,productQuantity,categoryId}=req.body
+
+        const data =await Product.findAll({
+            where :{
+                productId:id
+            }
+        })
+        let fileName
+        if(req.file){
+            fileName = req.file?.filename
+        }
+        else {
+            fileName = ""
+        }
+
+        if(data.length > 0 ){
+            await Product.update({
+                productName,
+                productDescription,
+                productPrice,
+                productQuantity,
+                productImage:fileName,
+                categoryId
+            },{
+                where:{
+                    productId:id
+                }
+            })
+           
+            
+            
+            res.status(200).json ({
+                message:  " Product updated successfully",
+                
+            })
+        }
+        else {
+            res.status(404).json({
+                message : " Product not found "
+            })
+        }
+
+    }
 }
 
 module.exports = ProductController

@@ -28,8 +28,8 @@ CategoryController.seedingCategory()
 
 app.use("",userRoutes)
 
-app.use("/admin/addproducts",productRoutes)
 app.use("",productRoutes)
+// app.use("",productRoutes)
 
 
 app.listen(PORT,()=>{
