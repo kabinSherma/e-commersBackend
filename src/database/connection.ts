@@ -5,6 +5,7 @@ const { Sequelize } = require('sequelize-typescript')
 const User = require('./models/userModels')
 const Product=require('./models/productModel')
 const Category =require('./models/category') 
+const Carts=require("./models/cartModel")
 
 const sequelize = new Sequelize({
     database: process.env.DB_NAME,
@@ -13,7 +14,7 @@ const sequelize = new Sequelize({
     dialect: 'mysql',
     password: process.env.DB_PASSWORD,
     port: Number(process.env.DB_PORT),
-    models: [ User,Product,Category]
+    models: [ User,Product,Category,Carts]
  })
 
 
@@ -32,12 +33,26 @@ const sequelize = new Sequelize({
 
 //  relationships
 
+
+//  user-product relation
+
 User.hasMany(Product,{foreignKey: "userId"})
 Product.belongsTo(User,{foreignKey:"userId"})
 
+// product-category relation
 
 Product.belongsTo(Category,{foreignKey: "categoryId"})
 Category.hasOne(Product,{foreignKey:"categoryId"})
+
+// cart-user relation
+
+Carts.belongsTo(User,{foreignKey:"userId"})
+User.hasMany(Carts,{foreignKey:"userId"})
+
+// cart-product relation
+
+Carts.belongsTo(Product,{foreignKey:"productId"})
+Product.hasMany(Carts,{foreignKey:"productId"})
 
 
 module.exports = sequelize
