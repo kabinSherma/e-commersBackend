@@ -12,8 +12,9 @@ router.route("/admin/addcategory").post(AuthMiddleware.isAuthenticated,AuthMiddl
 
 router.route("/categories").get(CategoryController.readCategories)
 
-//delete categories route 
+//delete and update categories route 
 
-router.route("/admin/deletecategory/:id").delete(AuthMiddleware.isAuthenticated,AuthMiddleware.restrictTo([Role.admin]),CategoryController.deleteCategory)
+router.route("/admin/category/:id").delete(AuthMiddleware.isAuthenticated,AuthMiddleware.restrictTo([Role.admin]),CategoryController.deleteCategory)
+.patch(AuthMiddleware.isAuthenticated,AuthMiddleware.restrictTo([Role.admin]),CategoryController.updateCategory)   
 
 module.exports = router

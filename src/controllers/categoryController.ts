@@ -110,7 +110,7 @@ class CategoryController {
                 categoryName
             },{
                 where:{
-                    categoryId:id
+                    id:id
                 }
             })
             res.status(200).json({
