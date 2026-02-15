@@ -52,7 +52,7 @@ class Product extends Model {
         type: DataType.INTEGER,
         // allowNull:false
     })
-    declare price : number;
+    declare productPrice : number;
 
 
     // product quantity

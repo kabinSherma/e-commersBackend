@@ -16,6 +16,7 @@ require('./database/connection')
 const productRoutes = require('./routes/productRoute')
 const userRoutes = require('./routes/userRoutes')
 const CategoryController = require ('./controllers/categoryController')
+const categoryRoutes =require('./routes/categoryRoute')
 
 // seeding admin crendeential 
 
@@ -29,7 +30,7 @@ CategoryController.seedingCategory()
 app.use("",userRoutes)
 
 app.use("",productRoutes)
-// app.use("",productRoutes)
+app.use("",categoryRoutes)
 
 
 app.listen(PORT,()=>{

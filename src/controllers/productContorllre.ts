@@ -17,6 +17,9 @@ interface MiddlewareRequest extends Request {
 
 
 class ProductController {
+
+
+    // add product 
     
     public static async addProduct (req:MiddlewareRequest, res:Response):Promise<void>{
         const {productName,productPrice,productDescription,productQuantity,categoryId}=req.body
@@ -56,6 +59,8 @@ class ProductController {
     }
 
 
+    // read products
+
     public static async getAllProducts(req:Request, res:Response):Promise<void>{
 
          const data = await Product.findAll(
@@ -80,6 +85,9 @@ class ProductController {
          })
     }
 
+
+
+    // read single produt 
 
     public static async getSingleProduct(req:Request,res:Response):Promise<void>{
 
@@ -117,6 +125,9 @@ class ProductController {
     }
 
 
+
+    // delete product
+
     public static  async deleteProduct(req:Request,res:Response):Promise<void>{
 
         const id =req.params.id
@@ -145,6 +156,8 @@ class ProductController {
         }
     }
 
+
+    // update / edit produt
 
     public static async editProduct(req:MiddlewareRequest,res:Response):Promise<void>{
 
@@ -192,6 +205,9 @@ class ProductController {
         }
 
     }
+
+    
+    
 }
 
 module.exports = ProductController
