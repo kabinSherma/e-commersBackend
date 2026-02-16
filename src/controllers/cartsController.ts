@@ -22,6 +22,9 @@ interface MiddlewareRequest extends Request {
 class CartsController{
 
 
+    //  add to cart
+
+
     public static async addToCart(req:MiddlewareRequest,res:Response):Promise<void>{
 
         
@@ -60,6 +63,11 @@ class CartsController{
         })
     }
 
+
+    // get cart items 
+
+
+
     public static async getMyCarts(req:MiddlewareRequest,res:Response):Promise<void>{
 
         const userId = req.user?.id
@@ -84,6 +92,82 @@ class CartsController{
                 message:" Carts items fetched ",
                 data : cartItems
             })
+        }
+    }
+
+
+
+    // delete cart items 
+
+
+    public static async deleteCart(req:MiddlewareRequest,res:Response):Promise<void>{
+
+        const id = req.params.id
+        const userId=req.user?.id
+
+        const [cartItems ]= await Carts.findAll({
+            where :{
+                 id:id
+            }
+        })
+        // console.log(cartItems)
+
+        if(!cartItems ){
+            res.status(404).json({
+                message: " No product with this id "
+            })
+        }
+
+        else {
+            await Carts.destroy({
+                where:{
+                    id:id,
+                    userId
+                }
+            })
+            res.status(200).json({
+                message: " Products deleted successfully"
+            })
+        }
+    }
+
+
+    // update cart
+
+    public static async updateCart(req:MiddlewareRequest,res:Response):Promise<void>{
+
+        const id=req.params.id
+        console.log(id)
+        const userId = req.user?.id
+        const {quantity,productId}=req.body
+
+        const [items ]= await Carts.findAll({
+            where:{
+                id:id
+            }
+        })
+
+        if(!items){
+            res.status(404).json({
+                message:" No product with this id"
+            })
+        }
+        else {
+
+            await Carts.update({
+                quantity,
+                userId,
+                productId
+            },{
+                where:{
+                    id:id
+                    
+                }
+            })
+            res.status(200).json({
+                message: " Cart Updated successfully"
+            })
+
         }
     }
 

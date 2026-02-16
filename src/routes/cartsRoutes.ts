@@ -8,4 +8,8 @@ const CartsController= require('../controllers/cartsController')
 
 router.route("/cart").post(AuthMiddleware.isAuthenticated,CartsController.addToCart).get(AuthMiddleware.isAuthenticated,CartsController.getMyCarts)
 
+// router.route('/cart/:id').delete(AuthMiddleware.isAuthenticated, CartsController.deleteCart)
+
+router.route("/cart/:id").delete(AuthMiddleware.isAuthenticated , CartsController.deleteCart).patch(AuthMiddleware.isAuthenticated,CartsController.updateCart)
+
 module.exports = router
