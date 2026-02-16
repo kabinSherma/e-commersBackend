@@ -6,6 +6,9 @@ const User = require('./models/userModels')
 const Product=require('./models/productModel')
 const Category =require('./models/category') 
 const Carts=require("./models/cartModel")
+const OrderDetails =require('./models/orderDetails')
+const Payment=require("./models/paymentModel")
+const Order =require('./models/orderModel')
 
 const sequelize = new Sequelize({
     database: process.env.DB_NAME,
@@ -14,7 +17,7 @@ const sequelize = new Sequelize({
     dialect: 'mysql',
     password: process.env.DB_PASSWORD,
     port: Number(process.env.DB_PORT),
-    models: [ User,Product,Category,Carts]
+    models: [ User,Product,Category,Carts,OrderDetails,Order,Payment ]
  })
 
 
@@ -54,5 +57,19 @@ User.hasMany(Carts,{foreignKey:"userId"})
 Carts.belongsTo(Product,{foreignKey:"productId"})
 Product.hasMany(Carts,{foreignKey:"productId"})
 
+// order-orderdetails relation
+
+Order.hasMany(OrderDetails,{foreignKey:"orderId"})
+OrderDetails.belongsTo(Order,{foreignKey:"orderId"})
+
+// orderdetails-product relation 
+
+Product.hasMany(OrderDetails,{foreignKey:"productId"})
+OrderDetails.belongsTo(Product,{foreignKey:"productId"})
+
+//order-payment relation
+
+Order.belongsTo(Payment,{foreignKey:"paymentId"})
+Payment.hasMany(Order,{foreignKey:"paymentId"})
 
 module.exports = sequelize

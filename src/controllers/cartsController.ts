@@ -1,6 +1,7 @@
 import type { Request,Response} from "express"
 const Carts=require("../database/models/cartModel")
 const Product =require("../database/models/productModel")
+const Category = require("../database/models/category")
 
 
 
@@ -77,8 +78,17 @@ class CartsController{
             },
             include :[
                 {
-                    model : Product
-                }
+                    model : Product,
+                    attributes:['productId','productName','productPrice','productImage'],
+                    include: [
+                        {
+                        model : Category,
+                        attributes: [ "id","categoryName"]
+                    }
+                    ]
+                }, 
+                
+                
             ]
         })
 
@@ -140,6 +150,12 @@ class CartsController{
         console.log(id)
         const userId = req.user?.id
         const {quantity,productId}=req.body
+        if(!quantity){
+            res.status(404).json({
+                message:" Please provide quantity "
+            })
+            return 
+        }
 
         const [items ]= await Carts.findAll({
             where:{
@@ -164,6 +180,7 @@ class CartsController{
                     
                 }
             })
+            
             res.status(200).json({
                 message: " Cart Updated successfully"
             })
